@@ -1,6 +1,6 @@
 Name:           yelp-xsl
 Version:        3.28.0
-Release:        2%{?dist}
+Release:        2%{?dist}.1
 Summary:        XSL stylesheets for the yelp help browser
 
 License:        LGPLv2+ and GPLv2+
@@ -8,6 +8,8 @@ Group:          Applications/System
 URL:            https://download.gnome.org/sources/yelp-xsl
 Source0:        https://download.gnome.org/sources/%{name}/3.28/%{name}-%{version}.tar.xz
 BuildArch:      noarch
+# https://issues.redhat.com/browse/RHEL-85922
+Patch0:         yelp-xsl-CVE-2025-3155.patch
 
 BuildRequires:  python3-libxml2
 BuildRequires:  /usr/bin/xmllint
@@ -31,6 +33,7 @@ XSL stylesheets in yelp-xsl.
 
 %prep
 %setup -q
+%patch0 -p1
 
 
 %build
@@ -53,6 +56,9 @@ make %{?_smp_mflags}
 
 
 %changelog
+* Wed Apr 23 2025 David King <dking@redhat.com> - 3.28.0-2.1
+- Fix CVE-2025-3155 (RHEL-85922)
+
 * Sun Jul 22 2018 Charalampos Stratakis <cstratak@redhat.com> - 3.28.0-2
 - Change build dependency to python3-libxml2
 
