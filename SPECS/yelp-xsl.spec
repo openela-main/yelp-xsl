@@ -2,13 +2,15 @@
 
 Name:           yelp-xsl
 Version:        40.2
-Release:        1%{?dist}
+Release:        1%{?dist}.1
 Summary:        XSL stylesheets for the yelp help browser
 
 License:        LGPLv2+ and GPLv2+
 URL:            https://download.gnome.org/sources/yelp-xsl
 Source0:        https://download.gnome.org/sources/%{name}/40/%{name}-%{tarball_version}.tar.xz
 BuildArch:      noarch
+# https://issues.redhat.com/browse/RHEL-85926
+Patch0:         yelp-xsl-CVE-2025-3155.patch
 
 BuildRequires:  gcc
 BuildRequires:  itstool
@@ -54,6 +56,9 @@ XSL stylesheets in yelp-xsl.
 
 
 %changelog
+* Wed Apr 23 2025 David King <dking@redhat.com> - 40.2-1.1
+- Fix CVE-2025-3155 (RHEL-85926)
+
 * Mon Aug 23 2021 Kalev Lember <klember@redhat.com> - 40.2-1
 - Update to 40.2
 
